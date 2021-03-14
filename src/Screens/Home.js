@@ -15,9 +15,9 @@ import Category from './../Components/Category';
 import CharList from './../Components/CharList';
 const characters = require('./../../assets/application.json');
 
-export default function Home({navigation}) {
+export default function Home() {
   return (
-    <View>
+    <View style={{position: 'relative'}}>
       <View style={styles.bar}>
         <Menu />
         <Marvel />
@@ -48,14 +48,7 @@ export default function Home({navigation}) {
           </Category>
         </View>
         {Object.entries(characters).map((item, index) => {
-          return (
-            <CharList
-              key={index}
-              characters={item[1]}
-              title={item[0]}
-              navigation={navigation}
-            />
-          );
+          return <CharList key={index} characters={item[1]} title={item[0]} />;
         })}
       </ScrollView>
     </View>

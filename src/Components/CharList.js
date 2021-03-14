@@ -11,45 +11,50 @@ import * as Colors from './../../assets/colors';
 import {imageChar} from './../Utils/ImageLoad';
 import LinearGradient from 'react-native-linear-gradient';
 
-export default function CharList({characters, title, navigation}) {
+export default function CharList({characters, title}) {
   return (
     <View style={styles.listCharacters}>
       <View style={styles.headerList}>
-        <Text style={styles.titleList}>{title}</Text>
+        <Text style={styles.titleList}>
+          {title.charAt(0).toUpperCase() + title.slice(1)}
+        </Text>
         <Text style={styles.extraList}>Ver tudo</Text>
       </View>
-      <View>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          {characters.map((item, index) => {
-            return (
-              <TouchableOpacity
-                key={index}
-                style={styles.cardChar}
-                activeOpacity={0.85}
-                onPress={() => navigation.navigate('Character', {item})}>
-                <ImageBackground
-                  source={imageChar[item.imagePath]}
-                  style={styles.imageCharacter}>
-                  <LinearGradient
-                    colors={[
-                      'rgba(0, 0, 0, 0)',
-                      'rgba(0, 0, 0, 0)',
-                      'rgba(0, 0, 0, 0.45)',
-                      'rgba(0, 0, 0, 1)',
-                    ]}
-                    style={[
-                      StyleSheet.absoluteFillObject,
-                      styles.positionContent,
-                    ]}>
-                    <Text style={styles.alteregoChar}>{item.alterEgo}</Text>
-                    <Text style={styles.nameChar}>{item.name}</Text>
-                  </LinearGradient>
-                </ImageBackground>
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView>
-      </View>
+
+      <ScrollView
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.homeScrollView}
+        style={styles.contentScrollView}>
+        {characters.map((item, index) => {
+          return (
+            <TouchableOpacity
+              key={index}
+              style={styles.cardChar}
+              activeOpacity={0.85}
+              onPress={() => console.log('Pressed')}>
+              <ImageBackground
+                source={imageChar[item.imagePath]}
+                style={styles.imageCharacter}>
+                <LinearGradient
+                  colors={[
+                    'rgba(0, 0, 0, 0)',
+                    'rgba(0, 0, 0, 0)',
+                    'rgba(0, 0, 0, 0.45)',
+                    'rgba(0, 0, 0, 1)',
+                  ]}
+                  style={[
+                    StyleSheet.absoluteFillObject,
+                    styles.positionContent,
+                  ]}>
+                  <Text style={styles.alteregoChar}>{item.alterEgo}</Text>
+                  <Text style={styles.nameChar}>{item.name}</Text>
+                </LinearGradient>
+              </ImageBackground>
+            </TouchableOpacity>
+          );
+        })}
+      </ScrollView>
     </View>
   );
 }
@@ -57,6 +62,9 @@ export default function CharList({characters, title, navigation}) {
 const styles = StyleSheet.create({
   listCharacters: {
     height: 318,
+    position: 'relative',
+    flex: 1,
+    overflow: 'visible',
   },
   headerList: {
     marginHorizontal: 24,
@@ -77,12 +85,29 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     color: Colors.primary_dark,
   },
+  homeScrollView: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  contentScrollView: {
+    borderWidth: 1,
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingTop: 5,
+    zIndex: 3,
+  },
   cardChar: {
     width: 140,
     height: 230,
+    minHeight: 230,
     borderRadius: 16,
     overflow: 'hidden',
     marginHorizontal: 16,
+    flex: 1,
+    zIndex: 5,
   },
   imageCharacter: {
     flex: 1,

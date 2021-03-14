@@ -8,20 +8,15 @@
 
 import React from 'react';
 import {StatusBar} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {Home, Character} from './src/Screens';
-const Stack = createStackNavigator();
+
+import {Home} from './src/Screens';
 
 function App() {
   return (
-    <NavigationContainer>
+    <>
       <StatusBar barStyle="dark-content" backgroundColor="white" />
-      <Stack.Navigator headerMode="none">
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Character" component={Character} />
-      </Stack.Navigator>
-    </NavigationContainer>
+      <Home />
+    </>
   );
 }
 
