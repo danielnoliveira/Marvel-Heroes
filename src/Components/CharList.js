@@ -11,21 +11,22 @@ import * as Colors from './../../assets/colors';
 import {imageChar} from './../Utils/ImageLoad';
 import LinearGradient from 'react-native-linear-gradient';
 
-export default function CharList({characters, title}) {
+export default function CharList({characters, title, navigation}) {
   return (
     <View style={styles.listCharacters}>
       <View style={styles.headerList}>
         <Text style={styles.titleList}>{title}</Text>
         <Text style={styles.extraList}>Ver tudo</Text>
       </View>
-      <View >
+      <View>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           {characters.map((item, index) => {
             return (
               <TouchableOpacity
                 key={index}
                 style={styles.cardChar}
-                activeOpacity={0.85}>
+                activeOpacity={0.85}
+                onPress={() => navigation.navigate('Character', {item})}>
                 <ImageBackground
                   source={imageChar[item.imagePath]}
                   style={styles.imageCharacter}>
@@ -55,7 +56,7 @@ export default function CharList({characters, title}) {
 
 const styles = StyleSheet.create({
   listCharacters: {
-      height: 318
+    height: 318,
   },
   headerList: {
     marginHorizontal: 24,

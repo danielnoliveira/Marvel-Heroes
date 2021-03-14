@@ -15,7 +15,7 @@ import Category from './../Components/Category';
 import CharList from './../Components/CharList';
 const characters = require('./../../assets/application.json');
 
-export default function Home() {
+export default function Home({navigation}) {
   return (
     <View>
       <View style={styles.bar}>
@@ -23,7 +23,9 @@ export default function Home() {
         <Marvel />
         <Search />
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{paddingBottom: 75}}>
         <View style={styles.header}>
           <Text style={styles.firstText}>Bem vindo ao Marvel Heroes</Text>
           <Text style={styles.secondText}>Escolha o seu personagem</Text>
@@ -46,7 +48,14 @@ export default function Home() {
           </Category>
         </View>
         {Object.entries(characters).map((item, index) => {
-          return <CharList key={index} characters={item[1]} title={item[0]} />;
+          return (
+            <CharList
+              key={index}
+              characters={item[1]}
+              title={item[0]}
+              navigation={navigation}
+            />
+          );
         })}
       </ScrollView>
     </View>
