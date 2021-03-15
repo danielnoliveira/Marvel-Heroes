@@ -41,7 +41,7 @@ export default function Character({route, navigation}) {
         contentContainerStyle={{paddingBottom: 700}}
         scrollToOverflowEnabled={true}>
         <ImageBackground
-          source={imageChar[item.imagePath]}
+          source={item.imagePath}
           style={styles.imageHeaderBackground}>
           <LinearGradient
             colors={[
@@ -99,14 +99,12 @@ export default function Character({route, navigation}) {
           </View>
           <View>
             <Text style={styles.titleSection}>Filmes</Text>
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}>
               {movies.map((movie, index) => {
                 return (
-                  <Image
-                    style={styles.movie}
-                    source={require('~/movies/avengers-1.jpg')}
-                    key={index}
-                  />
+                  <Image style={styles.movie} source={movie} key={index} />
                 );
               })}
             </ScrollView>
@@ -157,7 +155,7 @@ const styles = StyleSheet.create({
     lineHeight: 40,
     color: Colors.primary_silver,
     letterSpacing: 1,
-    width: '50%',
+    width: '55%',
     marginBottom: 48,
   },
   alterEgo: {
@@ -217,5 +215,5 @@ const styles = StyleSheet.create({
     width: 140,
     height: 230,
     marginHorizontal: 16,
-  }
+  },
 });

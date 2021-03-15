@@ -30,7 +30,7 @@ export default function CharList({characters, title, navigation}) {
                 activeOpacity={0.85}
                 onPress={() => navigation.navigate('Character', {item})}>
                 <ImageBackground
-                  source={imageChar[item.imagePath]}
+                  source={item.imagePath}
                   style={styles.imageCharacter}>
                   <LinearGradient
                     colors={[

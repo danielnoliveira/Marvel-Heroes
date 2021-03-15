@@ -1,27 +1,26 @@
 import React from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
 import * as Colors from './../../assets/colors';
-import {
-  Hero,
-  AntiHero,
-  Search,
-  Menu,
-  Marvel,
-  Villain,
-  Human,
-  Alien,
-} from './../Icons';
 import Category from './../Components/Category';
 import CharList from './../Components/CharList';
-const characters = require('./../../assets/application.json');
+import data from '~/application';
 
 export default function Home({navigation}) {
   return (
     <View>
       <View style={styles.bar}>
-        <Menu />
-        <Marvel />
-        <Search />
+        <Image
+          source={require('~/icons/menu.svg')}
+          style={{width: 32, height: 32}}
+        />
+        <Image
+          source={require('~/icons/marvel.svg')}
+          tintColor={Colors.primary_red}
+        />
+        <Image
+          source={require('~/icons/search.svg')}
+          style={{width: 32, height: 32}}
+        />
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -32,22 +31,42 @@ export default function Home({navigation}) {
         </View>
         <View style={styles.categories}>
           <Category colors={['#005BEA', '#00C6FB']}>
-            <Hero />
+            <Image
+              source={require('~/icons/hero.svg')}
+              style={{width: 32, height: 32}}
+              tintColor="white"
+            />
           </Category>
           <Category colors={['#ED1D24', '#ED1F69']}>
-            <Villain />
+            <Image
+              source={require('~/icons/villain.svg')}
+              style={{width: 32, height: 32}}
+              tintColor="white"
+            />
           </Category>
           <Category colors={['#B224EF', '#7579FF']}>
-            <AntiHero />
+            <Image
+              source={require('~/icons/antihero.svg')}
+              style={{width: 32, height: 32}}
+              tintColor="white"
+            />
           </Category>
           <Category colors={['#0BA360', '#3CBA92']}>
-            <Alien />
+            <Image
+              source={require('~/icons/alien.svg')}
+              style={{width: 32, height: 32}}
+              tintColor="white"
+            />
           </Category>
           <Category colors={['#FF7EB3', '#FF758C']}>
-            <Human />
+            <Image
+              source={require('~/icons/human.svg')}
+              style={{width: 32, height: 32}}
+              tintColor="white"
+            />
           </Category>
         </View>
-        {Object.entries(characters).map((item, index) => {
+        {Object.entries(data).map((item, index) => {
           return (
             <CharList
               key={index}
