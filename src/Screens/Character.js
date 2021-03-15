@@ -7,6 +7,7 @@ import {
   ImageBackground,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import * as Colors from './../../assets/colors';
 import LinearGradient from 'react-native-linear-gradient';
@@ -22,6 +23,7 @@ export default function Character({route, navigation}) {
   var l = Math.floor(biography.length / 2);
   const biographyPart1 = biography.slice(0, l + 1).join('.');
   const biographyPart2 = biography.slice(l + 1).join('.');
+  const {movies} = item;
   return (
     <View style={styles.container}>
       <StatusBar
@@ -36,7 +38,7 @@ export default function Character({route, navigation}) {
       </View>
       <ScrollView
         style={styles.containerSecundary}
-        contentContainerStyle={{paddingBottom: 600}}
+        contentContainerStyle={{paddingBottom: 700}}
         scrollToOverflowEnabled={true}>
         <ImageBackground
           source={imageChar[item.imagePath]}
@@ -85,20 +87,29 @@ export default function Character({route, navigation}) {
           <View>
             <Text style={styles.titleSection}>Habilidades</Text>
             <View style={styles.abilities}>
-              {Object.entries(abilities).map(ability=>{
-
+              {Object.entries(abilities).map((ability, index) => {
                 return (
-                  <View>
+                  <View key={index} style={styles.abilityLine}>
                     <Text style={styles.abilityName}>{ability[0]}</Text>
                     <BarAbility value={ability[1]} />
                   </View>
                 );
               })}
-
             </View>
           </View>
           <View>
             <Text style={styles.titleSection}>Filmes</Text>
+            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+              {movies.map((movie, index) => {
+                return (
+                  <Image
+                    style={styles.movie}
+                    source={require('~/movies/avengers-1.jpg')}
+                    key={index}
+                  />
+                );
+              })}
+            </ScrollView>
           </View>
         </View>
       </ScrollView>
@@ -188,14 +199,23 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 24,
   },
-  abilities:{
-    borderWidth: 1,
-    borderColor: 'white',
+  abilities: {
+    marginRight: 16,
   },
   abilityName: {
     color: Colors.primary_silver,
     fontFamily: 'gilroy-regular',
     fontSize: 18,
     lineHeight: 18,
+  },
+  abilityLine: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 24,
+  },
+  movie: {
+    width: 140,
+    height: 230,
+    marginHorizontal: 16,
   }
 });
