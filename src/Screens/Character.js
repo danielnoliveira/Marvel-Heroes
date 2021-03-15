@@ -11,9 +11,9 @@ import {
 } from 'react-native';
 import * as Colors from './../../assets/colors';
 import LinearGradient from 'react-native-linear-gradient';
-import {imageChar} from './../Utils/ImageLoad';
 import {Back, Height, Universe, Age, Weight} from './../Icons';
 import BarAbility from './../Components/BarAbility';
+import translate from '~/translates/dict';
 
 export default function Character({route, navigation}) {
   const {item} = route.params;
@@ -90,7 +90,9 @@ export default function Character({route, navigation}) {
               {Object.entries(abilities).map((ability, index) => {
                 return (
                   <View key={index} style={styles.abilityLine}>
-                    <Text style={styles.abilityName}>{ability[0]}</Text>
+                    <Text style={styles.abilityName}>
+                      {translate[ability[0]]}
+                    </Text>
                     <BarAbility value={ability[1]} />
                   </View>
                 );
@@ -155,7 +157,7 @@ const styles = StyleSheet.create({
     lineHeight: 40,
     color: Colors.primary_silver,
     letterSpacing: 1,
-    width: '55%',
+    width: '58%',
     marginBottom: 48,
   },
   alterEgo: {
