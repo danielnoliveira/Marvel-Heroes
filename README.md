@@ -12,7 +12,7 @@
     <br />
     <a href="https://github.com/Lorenalgm/marvel-heroes">Desafio</a>
     ·
-    <a href="https://devchallenge.now.sh/">DevChallenge</a>
+    <a href="https://devchallenge.now.sh/">DevChallenge - DESAFIO COMPLETO :heavy_check_mark:</a>
   </p>
 </p>
 
