@@ -15,7 +15,9 @@ export default function CharList({characters, title, navigation}) {
   return (
     <View style={styles.listCharacters}>
       <View style={styles.headerList}>
-        <Text style={styles.titleList}>{title}</Text>
+        <Text style={styles.titleList}>
+          {title.charAt(0).toUpperCase() + title.slice(1)}
+        </Text>
         <Text style={styles.extraList}>Ver tudo</Text>
       </View>
       <View>

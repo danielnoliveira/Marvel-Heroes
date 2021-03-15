@@ -7,5 +7,23 @@ import Marvel from './Marvel';
 import Villain from './Villain';
 import Alien from './Alien';
 import Human from './Human';
+import Height from './Height';
+import Universe from './Universe';
+import Back from './Back';
+import Weight from './Weight';
 
-export {Age, Hero, AntiHero, Menu, Search, Marvel, Villain, Alien, Human};
+export {
+  Age,
+  Hero,
+  AntiHero,
+  Menu,
+  Search,
+  Marvel,
+  Villain,
+  Alien,
+  Human,
+  Height,
+  Universe,
+  Back,
+  Weight,
+};
