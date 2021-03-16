@@ -1,71 +1,81 @@
 import React from 'react';
-import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
+import {View, ScrollView, Image} from 'react-native';
 import * as Colors from './../../assets/colors';
 import Category from './../Components/Category';
 import CharList from './../Components/CharList';
 import data from '~/application';
+import {
+  Icon,
+  HeaderBar,
+  TextGlob,
+  Title,
+  Header,
+  Categories,
+} from './../StyledComponents/styles';
+
+const categoryTag = [
+  {
+    linearGradient: ['#005BEA', '#00C6FB'],
+    iconFile: require('~/icons/hero.svg'),
+  },
+  {
+    linearGradient: ['#ED1D24', '#ED1F69'],
+    iconFile: require('~/icons/villain.svg'),
+  },
+  {
+    linearGradient: ['#B224EF', '#7579FF'],
+    iconFile: require('~/icons/antihero.svg'),
+  },
+  {
+    linearGradient: ['#0BA360', '#3CBA92'],
+    iconFile: require('~/icons/alien.svg'),
+  },
+  {
+    linearGradient: ['#FF7EB3', '#FF758C'],
+    iconFile: require('~/icons/human.svg'),
+  },
+];
 
 export default function Home({navigation}) {
   return (
     <View>
-      <View style={styles.bar}>
-        <Image
-          source={require('~/icons/menu.svg')}
-          style={{width: 32, height: 32}}
-        />
+      <HeaderBar>
+        <Icon source={require('~/icons/menu.svg')} />
         <Image
           source={require('~/icons/marvel.svg')}
           tintColor={Colors.primary_red}
         />
-        <Image
-          source={require('~/icons/search.svg')}
-          style={{width: 32, height: 32}}
-        />
-      </View>
+        <Icon source={require('~/icons/search.svg')} />
+      </HeaderBar>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{paddingBottom: 75}}>
-        <View style={styles.header}>
-          <Text style={styles.firstText}>Bem vindo ao Marvel Heroes</Text>
-          <Text style={styles.secondText}>Escolha o seu personagem</Text>
-        </View>
-        <View style={styles.categories}>
-          <Category colors={['#005BEA', '#00C6FB']}>
-            <Image
-              source={require('~/icons/hero.svg')}
-              style={{width: 32, height: 32}}
-              tintColor="white"
-            />
-          </Category>
-          <Category colors={['#ED1D24', '#ED1F69']}>
-            <Image
-              source={require('~/icons/villain.svg')}
-              style={{width: 32, height: 32}}
-              tintColor="white"
-            />
-          </Category>
-          <Category colors={['#B224EF', '#7579FF']}>
-            <Image
-              source={require('~/icons/antihero.svg')}
-              style={{width: 32, height: 32}}
-              tintColor="white"
-            />
-          </Category>
-          <Category colors={['#0BA360', '#3CBA92']}>
-            <Image
-              source={require('~/icons/alien.svg')}
-              style={{width: 32, height: 32}}
-              tintColor="white"
-            />
-          </Category>
-          <Category colors={['#FF7EB3', '#FF758C']}>
-            <Image
-              source={require('~/icons/human.svg')}
-              style={{width: 32, height: 32}}
-              tintColor="white"
-            />
-          </Category>
-        </View>
+        <Header>
+          <Title
+            fontSize="20px"
+            lineHeight="20px"
+            color={Colors.primary_grey}
+            fontFamily="gilroy-semibold"
+            margin="0 0 12px 0">
+            Bem vindo ao Marvel Heroes
+          </Title>
+          <TextGlob
+            fontSize="32px"
+            lineHeight="32px"
+            color={Colors.primary_dark}
+            fontFamily="gilroy-heavy">
+            Escolha o seu personagem
+          </TextGlob>
+        </Header>
+        <Categories>
+          {categoryTag.map((tag, index) => {
+            return (
+              <Category key={index} colors={tag.linearGradient}>
+                <Icon source={tag.iconFile} tintColor="white" />
+              </Category>
+            );
+          })}
+        </Categories>
         {Object.entries(data).map((item, index) => {
           return (
             <CharList
@@ -80,35 +90,3 @@ export default function Home({navigation}) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  bar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: 24,
-    paddingHorizontal: 24,
-    alignItems: 'center',
-  },
-  header: {
-    marginHorizontal: 24,
-    marginBottom: 32,
-  },
-  firstText: {
-    fontSize: 20,
-    fontFamily: 'gilroy-semibold',
-    color: Colors.primary_grey,
-    lineHeight: 20,
-    marginBottom: 8,
-  },
-  secondText: {
-    fontFamily: 'gilroy-heavy',
-    fontSize: 32,
-    lineHeight: 32,
-    color: Colors.primary_dark,
-  },
-  categories: {
-    marginHorizontal: 24,
-    flexDirection: 'row',
-    marginBottom: 48,
-  },
-});

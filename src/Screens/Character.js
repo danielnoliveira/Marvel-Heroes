@@ -7,13 +7,20 @@ import {
   ImageBackground,
   ScrollView,
   TouchableOpacity,
-  Image,
 } from 'react-native';
+
+import {
+  Container,
+  Header,
+  Content,
+} from './../StyledComponents/stylesCharacter';
+import NamesContent from './../Components/NamesContent';
+import SkillContainer from './../Components/SkillContainer';
 import * as Colors from './../../assets/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import {Back, Height, Universe, Age, Weight} from './../Icons';
-import BarAbility from './../Components/BarAbility';
-import translate from '~/translates/dict';
+import Biography from './../Components/Biography';
+import MoviesContainer from './../Components/MoviesContainer';
 
 export default function Character({route, navigation}) {
   const {item} = route.params;
@@ -24,18 +31,19 @@ export default function Character({route, navigation}) {
   const biographyPart1 = biography.slice(0, l + 1).join('.');
   const biographyPart2 = biography.slice(l + 1).join('.');
   const {movies} = item;
+
   return (
-    <View style={styles.container}>
+    <Container>
       <StatusBar
         barStyle="light-content"
+        translucent={true}
         backgroundColor="rgba(0,0,0,0.5)"
-        translucent
       />
-      <View style={styles.header}>
+      <Header>
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <Back />
         </TouchableOpacity>
-      </View>
+      </Header>
       <ScrollView
         style={styles.containerSecundary}
         contentContainerStyle={{paddingBottom: 700}}
@@ -53,11 +61,8 @@ export default function Character({route, navigation}) {
             style={StyleSheet.absoluteFillObject}
           />
         </ImageBackground>
-        <View style={styles.content}>
-          <View>
-            <Text style={styles.alterEgo}>{item.alterEgo}</Text>
-            <Text style={styles.name}>{item.name}</Text>
-          </View>
+        <Content>
+          <NamesContent alterEgo={item.alterEgo} name={item.name} />
           <View style={styles.contentCaracteristics}>
             <View style={styles.oneUnityCaracteristics}>
               <Age />
@@ -82,46 +87,16 @@ export default function Character({route, navigation}) {
               <Text style={styles.caracteristicsUnity}>{universe}</Text>
             </View>
           </View>
-          <Text style={styles.biography}>{biographyPart1}</Text>
-          <Text style={styles.biography}>{biographyPart2}</Text>
-          <View>
-            <Text style={styles.titleSection}>Habilidades</Text>
-            <View style={styles.abilities}>
-              {Object.entries(abilities).map((ability, index) => {
-                return (
-                  <View key={index} style={styles.abilityLine}>
-                    <Text style={styles.abilityName}>
-                      {translate[ability[0]]}
-                    </Text>
-                    <BarAbility value={ability[1]} />
-                  </View>
-                );
-              })}
-            </View>
-          </View>
-          <View>
-            <Text style={styles.titleSection}>Filmes</Text>
-            <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}>
-              {movies.map((movie, index) => {
-                return (
-                  <Image style={styles.movie} source={movie} key={index} />
-                );
-              })}
-            </ScrollView>
-          </View>
-        </View>
+          <Biography paragraphs={[biographyPart1, biographyPart2]} />
+          <SkillContainer abilities={abilities} />
+          <MoviesContainer movies={movies} />
+        </Content>
       </ScrollView>
-    </View>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#000',
-    flex: 1,
-  },
   containerSecundary: {
     zIndex: 2,
     position: 'absolute',
@@ -129,16 +104,6 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
-  },
-  header: {
-    width: '100%',
-    height: 64,
-    marginTop: 24,
-    paddingHorizontal: 24,
-    position: 'absolute',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    zIndex: 10,
-    justifyContent: 'center',
   },
   imageHeaderBackground: {
     resizeMode: 'cover',
