@@ -7,10 +7,10 @@ import data from '~/application';
 import {
   Icon,
   HeaderBar,
-  TextGlob,
-  Title,
   Header,
   Categories,
+  TitlePrimary,
+  TitleSecundary,
 } from './../StyledComponents/styles';
 
 const categoryTag = [
@@ -51,21 +51,8 @@ export default function Home({navigation}) {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{paddingBottom: 75}}>
         <Header>
-          <Title
-            fontSize="20px"
-            lineHeight="20px"
-            color={Colors.primary_grey}
-            fontFamily="gilroy-semibold"
-            margin="0 0 12px 0">
-            Bem vindo ao Marvel Heroes
-          </Title>
-          <TextGlob
-            fontSize="32px"
-            lineHeight="32px"
-            color={Colors.primary_dark}
-            fontFamily="gilroy-heavy">
-            Escolha o seu personagem
-          </TextGlob>
+          <TitlePrimary>Bem vindo ao Marvel Heroes</TitlePrimary>
+          <TitleSecundary>Escolha o seu personagem</TitleSecundary>
         </Header>
         <Categories>
           {categoryTag.map((tag, index) => {

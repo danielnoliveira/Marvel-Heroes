@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useRef} from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   ImageBackground,
   ScrollView,
   TouchableOpacity,
+  Animated,
 } from 'react-native';
 
 import {
@@ -31,23 +32,57 @@ export default function Character({route, navigation}) {
   const biographyPart1 = biography.slice(0, l + 1).join('.');
   const biographyPart2 = biography.slice(l + 1).join('.');
   const {movies} = item;
+  const scrollY = useRef(new Animated.Value(0)).current;
 
+  const _getColorBackgroud = () => {
+    return scrollY.interpolate({
+      inputRange: [0, 200],
+      outputRange: ['rgba(0,0,0,0)', 'rgba(0,0,0,0.75)'],
+      extrapolate: 'clamp',
+      useNativeDriver: true,
+    });
+  };
+  const colorBG = _getColorBackgroud();
+  console.log(colorBG);
   return (
     <Container>
       <StatusBar
         barStyle="light-content"
         translucent={true}
-        backgroundColor="rgba(0,0,0,0.5)"
+        backgroundColor="rgba(0,0,0,0.75)"
       />
-      <Header>
+      <Animated.View
+        style={{
+          width: '100%',
+          height: 64,
+          marginTop: 24,
+          paddingHorizontal: 24,
+          position: 'absolute',
+          zIndex: 10,
+          justifyContent: 'center',
+          backgroundColor: colorBG,
+        }}>
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <Back />
         </TouchableOpacity>
-      </Header>
-      <ScrollView
+      </Animated.View>
+      <Animated.ScrollView
         style={styles.containerSecundary}
         contentContainerStyle={{paddingBottom: 700}}
-        scrollToOverflowEnabled={true}>
+        scrollToOverflowEnabled={true}
+        scrollEventThrottle={16}
+        overScrollMode={'never'}
+        onScroll={Animated.event(
+          [
+            {
+              nativeEvent: {contentOffset: {y: scrollY}},
+            },
+          ],
+          {
+            listener: event => {},
+            useNativeDriver: false,
+          },
+        )}>
         <ImageBackground
           source={item.imagePath}
           style={styles.imageHeaderBackground}>
@@ -91,7 +126,7 @@ export default function Character({route, navigation}) {
           <SkillContainer abilities={abilities} />
           <MoviesContainer movies={movies} />
         </Content>
-      </ScrollView>
+      </Animated.ScrollView>
     </Container>
   );
 }

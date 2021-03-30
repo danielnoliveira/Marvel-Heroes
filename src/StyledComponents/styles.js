@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components';
 import * as Colors from './../../assets/colors';
+import {Dimensions} from 'react-native';
+const {width,height} = Dimensions.get("window");
 export const Icon = styled.Image`
     width: 32px;
     height: 32px;
@@ -11,7 +13,18 @@ export const HeaderBar = styled.View`
     padding: 24px;
     align-items: center;
 `
-
+export const TitlePrimary = styled.Text`
+    font-size: 20px;
+    font-family: "gilroy-semibold";
+    color: ${Colors.primary_grey};
+    line-height: 20px;
+`
+export const TitleSecundary = styled.Text`
+    font-size: 32px;
+    line-height: 32px;
+    font-family: "gilroy-heavy";
+    color: ${Colors.primary_dark};
+`
 export const TextGlob = styled.Text`
     font-size: ${props => props.fontSize};
     font-family: "${props => props.fontFamily}";
@@ -35,8 +48,10 @@ export const Paragraph = styled.Text`
 export const Header = styled.View`
     margin: 0 24px 32px 24px;
 `
+
+const marginEqual = (width-340)/2;
 export const Categories = styled.View`
-    margin: 0 24px 48px 24px;
+    margin: 0 ${marginEqual}px 48px ${marginEqual}px;
     flex-direction: row;
 `
 
